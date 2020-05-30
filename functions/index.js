@@ -86,6 +86,18 @@ app.get('/team', (req, res) => {
         team_data = temp;
     }
 
+    if (req.query.designation) {
+        temp = []
+        for (member in team_data) {
+            var str = team_data[member].Designation.toLowerCase().trim();
+            if (str.includes(req.query.designation.toLowerCase().trim())) {
+                temp.push(team_data[member])
+            }
+        }
+
+        team_data = temp;
+    }
+
     res.status(200).json({
         data: team_data
     });
